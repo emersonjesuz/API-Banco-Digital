@@ -6,7 +6,6 @@ const {
   criarExtrato,
 } = require("../utils");
 const bancodedados = require("../bancodedados");
-const { log } = require("console");
 
 function criarIndentificardorUnico() {
   const contas = bancoDeDados.contas;
@@ -46,7 +45,9 @@ function listarContas(req, res) {
   try {
     res.status(200).json(bancodedados.contas);
   } catch (error) {
-    return res.status(404).json({ message: error });
+    return res
+      .status(404)
+      .json({ message: "A um problema no servidor, estamos resolvendo " });
   }
 }
 
@@ -81,7 +82,9 @@ async function criarConta(req, res) {
 
     res.status(201).json(novaConta);
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res
+      .status(500)
+      .json({ message: "A um problema no servidor, estamos resolvendo " });
   }
 }
 
@@ -125,7 +128,9 @@ function atualizarUsuario(req, res) {
 
     res.status(200).json({ mensagem: "Conta atualizada com sucesso!" });
   } catch (error) {
-    return res.status(404).json({ message: error });
+    return res
+      .status(404)
+      .json({ message: "A um problema no servidor, estamos resolvendo " });
   }
 }
 
@@ -178,7 +183,11 @@ function excluirConta(req, res) {
     atualizarBancoDeDados(novoBancoDeDados);
 
     res.json({ message: "Conta excluída com sucesso!" });
-  } catch (error) {}
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "A um problema no servidor, estamos resolvendo " });
+  }
 }
 
 async function depositar(req, res) {
@@ -214,7 +223,9 @@ async function depositar(req, res) {
 
     res.status(200).json({ mensagem: "Depósito realizado com sucesso!" });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res
+      .status(500)
+      .json({ message: "A um problema no servidor, estamos resolvendo " });
   }
 }
 
@@ -242,7 +253,7 @@ async function sacar(req, res) {
   if (encontrarConta.saldo < valor) {
     return res.status(400).json({ message: "Valor insuficiente em conta." });
   }
-  console.log(analisandoTipoDosDadosDoSaque);
+
   if (!encontrarConta || valor <= 0 || !analisandoTipoDosDadosDoSaque)
     return res.status(400).json({ message: "Dados do saque invalidos!" });
 
@@ -263,7 +274,9 @@ async function sacar(req, res) {
 
     res.status(200).json({ mensagem: "Saque realizado com sucesso!" });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res
+      .status(500)
+      .json({ message: "A um problema no servidor, estamos resolvendo " });
   }
 }
 
@@ -336,7 +349,9 @@ function saldo(req, res) {
   try {
     return res.status(200).json({ saldo: `${checarConta.saldo}` });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res
+      .status(500)
+      .json({ message: "A um problema no servidor, estamos resolvendo " });
   }
 }
 
@@ -358,7 +373,9 @@ function extrato(req, res) {
   try {
     return res.status(200).json(criarExtrato(numeroDaConta));
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res
+      .status(500)
+      .json({ message: "A um problema no servidor, estamos resolvendo " });
   }
 }
 
