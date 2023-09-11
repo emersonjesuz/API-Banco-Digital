@@ -84,7 +84,6 @@ Abaixo, listamos os possíveis `status code` esperados como resposta da API.
     usuario: {
         nome: 'Foo Bar',
         cpf: '00011122233',
-        data_nascimento: '2021-03-15',
         telefone: '71999998888',
         email: 'foo@bar.com',
         senha: '1234'
@@ -99,7 +98,7 @@ Abaixo, listamos os possíveis `status code` esperados como resposta da API.
 
 ### Atualizar usuário da conta bancária
 
-#### `PUT` `/contas/:numeroConta/usuario`
+#### `PUT` `/contas/atualizar/:numeroConta`
 
 - Entradas
 
@@ -113,14 +112,6 @@ Abaixo, listamos os possíveis `status code` esperados como resposta da API.
 - Saída
 
   - Sucesso ou erro
-
-#### Função
-
-```javascript
-function atualizarUsuarioConta(...) {
-    //
-}
-```
 
 #### Saída
 
@@ -138,7 +129,7 @@ function atualizarUsuarioConta(...) {
 
 ### Excluir Conta
 
-#### `DELETE` `/contas/:numeroConta`
+#### `DELETE` `/contas/deletar/:numeroDaConta`
 
 - Entradas
 
@@ -147,14 +138,6 @@ function atualizarUsuarioConta(...) {
 - Saida
 
   - Sucesso ou erro
-
-#### Função
-
-```javascript
-function excluirConta(...) {
-    //
-}
-```
 
 #### Saída
 
@@ -182,14 +165,6 @@ function excluirConta(...) {
 - Saida
 
   - Sucesso ou erro
-
-#### Função
-
-```javascript
-function depositar(...) {
-    //
-}
-```
 
 #### Saída
 
@@ -228,14 +203,6 @@ function depositar(...) {
 - Saída
 
   - Sucesso ou erro
-
-#### Função
-
-```javascript
-function sacar(...) {
-    //
-}
-```
 
 #### Saída
 
@@ -276,14 +243,6 @@ function sacar(...) {
 
   - Sucesso ou erro
 
-#### Função
-
-```javascript
-function tranferir(...) {
-    //
-}
-```
-
 #### Saída
 
 ```javascript
@@ -303,8 +262,8 @@ function tranferir(...) {
 ```javascript
 {
     data: "2021-08-10 23:40:35",
-    numero_conta_origem: "1",
-    numero_conta_destino: "2",
+    numeroContaOrigem: "1",
+    numeroContaDestino: "2",
     valor: 10000
 }
 ```
@@ -322,20 +281,12 @@ function tranferir(...) {
 
   - Saldo da conta
 
-#### Função
-
-```javascript
-function saldo(...) {
-    //
-}
-```
-
 #### Saída
 
 ```javascript
 // HTTP Status 200
 {
-  saldo: 13000;
+  balance: 13000;
 }
 
 // HTTP Status 400, 404
@@ -358,58 +309,41 @@ function saldo(...) {
 
 #### Função
 
-```javascript
-function extrato(...) {
-    //
-}
-```
-
 #### Saída
 
 ```javascript
 // HTTP Status 200
 {
-  depositos: [
-    {
-      data: "2021-08-18 20:46:03",
-      numero_conta: "1",
-      valor: 10000
-    },
-    {
-      data: "2021-08-18 20:46:06",
-      numero_conta: "1",
-      valor: 10000
-    }
-  ],
-  saques: [
-    {
-      data: "2021-08-18 20:46:18",
-      numero_conta: "1",
-      valor: 1000
-    }
-  ],
-  transferenciasEnviadas: [
-    {
-      data: "2021-08-18 20:47:10",
-      numero_conta_origem: "1",
-      numero_conta_destino: "2",
-      valor: 5000
-    }
-  ],
-  transferenciasRecebidas: [
-    {
-      data: "2021-08-18 20:47:24",
-      numero_conta_origem: "2",
-      numero_conta_destino: "1",
-      valor: 2000
-    },
-    {
-      data: "2021-08-18 20:47:26",
-      numero_conta_origem: "2",
-      numero_conta_destino: "1",
-      valor: 2000
-    }
-  ]
+	"deposits": [
+		{
+			"date": "2023-30-04  10:23:7",
+			"numberAccount": 1,
+			"value": 10000
+		}
+	],
+	"withdrawals": [
+		{
+			"date": "2023-04-05  15:51:42",
+			"numberAccount": 1,
+			"value": 200
+		}
+	],
+	"transferenciasEnviadas": [
+		{
+			"date": "2023-30-04  10:24:38",
+			"numberAccountOrigin": 1,
+			"numberAccountDestiny": 2,
+			"value": 400
+		}
+	],
+	"transferenciasRecebidas": [
+		{
+			"date": "2023-30-04  10:24:51",
+			"numberAccountOrigin": 2,
+			"numberAccountDestiny": 1,
+			"value": 400
+		}
+	]
 }
 
 // HTTP Status 400, 404
